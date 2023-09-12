@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: [암호화된 DB 주소]
@@ -22,4 +24,7 @@ spring:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
-
+coupang:
+  secret_key: [쿠팡연동비밀키]
+  access_key: [쿠팡연동접속키]
+  domain: https://api-gateway.coupang.com

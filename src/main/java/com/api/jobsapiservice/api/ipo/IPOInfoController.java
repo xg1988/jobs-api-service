@@ -1,7 +1,6 @@
 package com.api.jobsapiservice.api.ipo;
 
 import com.api.jobsapiservice.contants.BaseConst;
-import com.api.jobsapiservice.dto.IPOInfoDto;
 import com.api.jobsapiservice.dto.Message;
 import com.api.jobsapiservice.dto.StatusEnum;
 import org.springframework.http.HttpHeaders;

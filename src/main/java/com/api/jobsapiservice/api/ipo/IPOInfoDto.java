@@ -1,4 +1,4 @@
-package com.api.jobsapiservice.dto;
+package com.api.jobsapiservice.api.ipo;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

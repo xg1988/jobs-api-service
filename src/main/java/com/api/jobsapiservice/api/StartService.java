@@ -1,6 +1,6 @@
 package com.api.jobsapiservice.api;
 
-import com.api.jobsapiservice.dto.IPOInfoDto;
+import com.api.jobsapiservice.api.ipo.IPOInfoDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

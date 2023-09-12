@@ -1,6 +1,6 @@
 package com.api.jobsapiservice.api;
 
-import com.api.jobsapiservice.dto.IPOInfoDto;
+import com.api.jobsapiservice.api.ipo.IPOInfoDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
