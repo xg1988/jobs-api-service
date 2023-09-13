@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @ToString
 @Entity
-@Table(name="naver_ipo_info")
+@Table(name="ipo_info")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -11,6 +11,14 @@ public class CoupangDto {
     private String rMessage;
     private List<DataDto> data;
 
+    public String getrCode(){
+        return this.rCode;
+    }
+
+    public String getrMessage(){
+        return this.rMessage;
+    }
+
     @Data
     static class DataDto{
         private String productId;

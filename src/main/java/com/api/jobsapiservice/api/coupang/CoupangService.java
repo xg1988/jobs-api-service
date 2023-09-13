@@ -37,7 +37,7 @@ public class CoupangService {
 
     private final static String REQUEST_JSON = "{\"coupangUrls\": [\"replacer\"]}";
 
-    public CoupangDto bestcategory(String categoryId, int size) throws ParseException, IOException {
+    public CoupangDto bestcategories(String categoryId, int size) throws ParseException, IOException {
         String requestUrl = "/v2/providers/affiliate_open_api/apis/openapi/products/bestcategories/"+categoryId+"?limit="+size;
 
         // Generate HMAC string
@@ -70,7 +70,6 @@ public class CoupangService {
                 .get(requestUrl)
                 .addHeader(BaseConst.AUTHORIZATION_HEADER_KEY, authorization)
                 .build();
-
         org.apache.http.HttpResponse httpResponse = org.apache.http.impl.client.HttpClientBuilder.create().build().execute(host, request);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -91,21 +90,21 @@ public class CoupangService {
                 .build();
 
         org.apache.http.HttpResponse httpResponse = org.apache.http.impl.client.HttpClientBuilder.create().build().execute(host, request);
+        String httpResponseString = EntityUtils.toString(httpResponse.getEntity());
+        log.info("httpResponseString : {}",httpResponseString);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        return objectMapper.readValue(EntityUtils.toString(httpResponse.getEntity()), CoupangSearchDto.class);
+        return objectMapper.readValue(httpResponseString, CoupangSearchDto.class);
     }
 
-    public String deeplink(String targetUrl) throws ParseException, IOException {
+    public CoupangLinkDto deeplink(String targetUrl) throws ParseException, IOException {
 
         String requestUrl = "/v2/providers/affiliate_open_api/apis/openapi/deeplink";
 
         // Generate HMAC string
         String authorization = HmacGenerator.generate(BaseConst.POST_REQUEST_METHOD, requestUrl, SECRET_KEY, ACCESS_KEY);
 
-        String temp = REQUEST_JSON.replaceAll("replacer", targetUrl);
-        System.out.println(temp);
-        StringEntity entity = new StringEntity(temp, BaseConst.DEFAULT_CHAR_SET);
+        StringEntity entity = new StringEntity(REQUEST_JSON.replaceAll("replacer", targetUrl), BaseConst.DEFAULT_CHAR_SET);
         entity.setContentEncoding(BaseConst.DEFAULT_CHAR_SET);
         entity.setContentType(BaseConst.APPLICATION_JSON_TYPE);
 
@@ -117,7 +116,10 @@ public class CoupangService {
                 .build();
 
         org.apache.http.HttpResponse httpResponse = org.apache.http.impl.client.HttpClientBuilder.create().build().execute(host, request);
-
-        return EntityUtils.toString(httpResponse.getEntity());
+        String httpResponseString = EntityUtils.toString(httpResponse.getEntity());
+        log.info("httpResponseString : {}",httpResponseString);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return objectMapper.readValue(httpResponseString, CoupangLinkDto.class);
     }
 }

@@ -10,6 +10,14 @@ public class CoupangSearchDto {
     private String rMessage;
     private SearchDataDto data;
 
+    public String getrCode(){
+        return this.rCode;
+    }
+
+    public String getrMessage(){
+        return this.rMessage;
+    }
+
     @Data
     static class SearchDataDto{
         private String landingUrl;
