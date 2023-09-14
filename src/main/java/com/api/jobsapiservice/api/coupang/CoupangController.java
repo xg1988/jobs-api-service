@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
+/**
+ * 쿠팡 파트너스 API 연동
+ */
 @RestController
 @RequestMapping(value = "/coupang")
 @Slf4j
@@ -27,6 +30,12 @@ public class CoupangController {
         this.coupangService = coupangService;
     }
 
+    /**
+     * 쿠팡 키워드 검색
+     * @param keyword
+     * @return
+     * @throws IOException
+     */
     @GetMapping(value = "/search/{keyword}")
     public ResponseEntity search(@PathVariable String keyword) throws IOException {
         log.debug("keyword:{}", keyword);
@@ -44,6 +53,11 @@ public class CoupangController {
                 .data(coupangSearchDto.getData()).build(), headers, HttpStatus.OK);
     }
 
+    /**
+     * 쿠팡 골드박스 검색
+     * @return
+     * @throws IOException
+     */
     @GetMapping(value = "/goldbox")
     public ResponseEntity goldbox() throws IOException {
 
@@ -60,6 +74,12 @@ public class CoupangController {
                 .data(coupangDto.getData()).build(), headers, HttpStatus.OK);
     }
 
+    /**
+     * 쿠팡 카테고리 검색
+     * @param categoryId
+     * @return
+     * @throws IOException
+     */
     @GetMapping(value = "/bestcategories/{categoryId}")
     public ResponseEntity bestcategories(@PathVariable String categoryId) throws IOException {
         log.debug("categoryId:{}", categoryId);

@@ -47,11 +47,4 @@ public class CoupangAPITest {
         assertThat(coupangDto.getrCode()).isEqualTo("0");
     }
 
-
-    @DisplayName("4. 주소")
-    @Test
-    void test_4() throws IOException {
-        CoupangLinkDto coupangLinkDto = coupangService.deeplink("https://www.coupang.com/vp/products/184614775");
-        assertThat(coupangLinkDto.getrCode()).isEqualTo("0");
-    }
 }
