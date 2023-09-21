@@ -17,22 +17,11 @@ public class JasyptTest {
     @DisplayName("1. 암/복호화 테스트")
     @Test
     void test_1(){
-        String url = "jdbc:mysql://localhost:3306/jobsservice";
-        String username = "jobs01";
-        String password = "l2p7w4!!";
+        String url = "주소";
+        String username = "계정";
+        String password = "비밀번호";
         System.out.println("url: ENC(" + jasyptConfig.stringEncryptor().encrypt(url) + ")");
         System.out.println("username: ENC(" + jasyptConfig.stringEncryptor().encrypt(username)+ ")");
         System.out.println("password: ENC(" + jasyptConfig.stringEncryptor().encrypt(password)+ ")");
-/**
- *     url: ENC(VcHnFPAZ8a1zkFp4OqB0BwAoGVtA4ZnWt5cvczww7PUFmINk+t+fXLZN3rkPTjFeeIFDA17W6QA=)
- *     username: ENC(WJcwD1Qi8atm1ezWhpqHDA==)
- *     password: ENC(80YPILKsH1/tueRSiwvp3wJ7H4GOl05O)
- */
-        String encUrl = "VcHnFPAZ8a1zkFp4OqB0BwAoGVtA4ZnWt5cvczww7PUFmINk+t+fXLZN3rkPTjFeeIFDA17W6QA=";
-        String encUsername = "WJcwD1Qi8atm1ezWhpqHDA==";
-        String encPassword = "80YPILKsH1/tueRSiwvp3wJ7H4GOl05O";
-        System.out.println("url: ENC(" + jasyptConfig.stringEncryptor().decrypt(encUrl) + ")");
-        System.out.println("username: ENC(" + jasyptConfig.stringEncryptor().decrypt(encUsername)+ ")");
-        System.out.println("password: ENC(" + jasyptConfig.stringEncryptor().decrypt(encPassword)+ ")");
     }
 }
