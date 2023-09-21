@@ -8,11 +8,11 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class IPOInfoService {
+public class IPOInfoServiceImpl implements IPOService{
 
     private final IPOInfoRepository ipoInfoRepository;
 
-    public IPOInfoService(IPOInfoRepository ipoInfoRepository) {
+    public IPOInfoServiceImpl(IPOInfoRepository ipoInfoRepository) {
         this.ipoInfoRepository = ipoInfoRepository;
     }
 

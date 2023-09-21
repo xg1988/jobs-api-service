@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: cafe24
+    active: aws
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: [암호화된 DB 주소]

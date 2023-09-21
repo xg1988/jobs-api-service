@@ -1,28 +1,24 @@
 package com.api.jobsapiservice;
 
 import com.api.jobsapiservice.api.coupang.CoupangDto;
-import com.api.jobsapiservice.api.coupang.CoupangLinkDto;
 import com.api.jobsapiservice.api.coupang.CoupangSearchDto;
-import com.api.jobsapiservice.api.coupang.CoupangService;
+import com.api.jobsapiservice.api.coupang.CoupangServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.test.context.ContextConfiguration;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
-import java.util.List;
 
 @SpringBootTest
 @PropertySource("classpath:application-local.yml")
 public class CoupangAPITest {
 
     @Autowired
-    CoupangService coupangService;
+    CoupangServiceImpl coupangService;
 
     @DisplayName("1. 쿠팡 기본 테스트")
     @Test

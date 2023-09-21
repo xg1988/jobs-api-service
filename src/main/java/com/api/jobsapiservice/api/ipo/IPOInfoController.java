@@ -20,9 +20,9 @@ import java.util.Optional;
 @RestController
 public class IPOInfoController {
 
-    private final IPOInfoService ipoInfoService;
+    private final IPOInfoServiceImpl ipoInfoService;
 
-    public IPOInfoController(IPOInfoService ipoInfoService) {
+    public IPOInfoController(IPOInfoServiceImpl ipoInfoService) {
         this.ipoInfoService = ipoInfoService;
     }
 

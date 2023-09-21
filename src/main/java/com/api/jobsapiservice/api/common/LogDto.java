@@ -12,6 +12,7 @@ import lombok.Data;
 @Table(name="common_log")
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 @Data
 @Builder
 public class LogDto {

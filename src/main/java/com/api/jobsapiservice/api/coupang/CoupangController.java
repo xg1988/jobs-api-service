@@ -22,9 +22,9 @@ import java.nio.charset.Charset;
 @Slf4j
 public class CoupangController {
 
-    private final CoupangService coupangService;
+    private final CoupangServiceImpl coupangService;
 
-    public CoupangController(CoupangService coupangService) {
+    public CoupangController(CoupangServiceImpl coupangService) {
         this.coupangService = coupangService;
     }
 
