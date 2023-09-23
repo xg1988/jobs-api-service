@@ -13,4 +13,6 @@ public class BaseConst {
     public static final String POST_REQUEST_METHOD = "POST";
     public static final String AUTHORIZATION_HEADER_KEY = "Authorization";
 
+    public static final String USER_AGENT = "User-Agent";
+
 }

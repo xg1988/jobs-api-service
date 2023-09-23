@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,8 +18,11 @@ import java.nio.charset.Charset;
 @RequestMapping(value = "/public")
 public class PublicDataController {
 
-    @GetMapping(value = "/realestate/${pageNo}/${numOfRows}/${lawdCd}/${dealYmd}")
-    public ResponseEntity getRealestate(){
+    @GetMapping(value = "/realestate/{pageNo}/{numOfRows}/{lawdCd}/{dealYmd}")
+    public ResponseEntity getRealestate(@PathVariable String pageNo
+                                        , @PathVariable String numOfRows
+                                        , @PathVariable String lawdCd
+                                        , @PathVariable String dealYmd){
 
         /**
          * 부동산 정보 호출
