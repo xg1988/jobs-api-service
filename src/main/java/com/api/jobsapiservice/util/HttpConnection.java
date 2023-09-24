@@ -13,7 +13,7 @@ import java.net.URL;
 @Component
 public class HttpConnection {
     public String call(String callUrl, String method) {
-        return call(callUrl, method, null, null);
+        return call(callUrl, method, null, "");
     }
     public String call(String callUrl, String method, String userAgent, String data) {
         String response = null;
