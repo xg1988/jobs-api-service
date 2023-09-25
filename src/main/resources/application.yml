@@ -28,3 +28,7 @@ coupang:
   secret_key: [쿠팡연동비밀키]
   access_key: [쿠팡연동접속키]
   domain: https://api-gateway.coupang.com
+common:
+  realestate:
+    url: http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev
+    service_key: [서비스키(디코딩)]

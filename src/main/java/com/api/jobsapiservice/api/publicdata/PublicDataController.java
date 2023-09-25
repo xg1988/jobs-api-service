@@ -1,5 +1,7 @@
 package com.api.jobsapiservice.api.publicdata;
 
+import com.api.jobsapiservice.api.publicdata.realestate.RealEstateResultDto;
+import com.api.jobsapiservice.api.publicdata.realestate.RealEstateService;
 import com.api.jobsapiservice.contants.BaseConst;
 import com.api.jobsapiservice.dto.Message;
 import com.api.jobsapiservice.dto.StatusEnum;
@@ -18,6 +20,12 @@ import java.nio.charset.Charset;
 @RequestMapping(value = "/public")
 public class PublicDataController {
 
+    private RealEstateService realEstateService;
+
+    public PublicDataController(RealEstateService realEstateService){
+        this.realEstateService = realEstateService;
+    }
+
     @GetMapping(value = "/realestate/{pageNo}/{numOfRows}/{lawdCd}/{dealYmd}")
     public ResponseEntity getRealestate(@PathVariable String pageNo
                                         , @PathVariable String numOfRows
@@ -28,6 +36,8 @@ public class PublicDataController {
          * 부동산 정보 호출
          */
 
+        RealEstateResultDto realEstateResultDto = realEstateService.getRealEstateTransaction(pageNo, numOfRows, lawdCd, dealYmd);
+
         HttpHeaders headers= new HttpHeaders();
         headers.setContentType(new MediaType(BaseConst.DEFAULT_CONTENT_TYPE
                 , BaseConst.DEFAULT_SUB_TUPE
@@ -36,6 +46,6 @@ public class PublicDataController {
         return new ResponseEntity<>(new Message().builder()
                 .status(StatusEnum.OK)
                 .message("성공")
-                .data("").build(), headers, HttpStatus.OK);
+                .data(realEstateResultDto.toString()).build(), headers, HttpStatus.OK);
     }
 }
