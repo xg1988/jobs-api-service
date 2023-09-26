@@ -26,6 +26,14 @@ public class PublicDataController {
         this.realEstateService = realEstateService;
     }
 
+    /**
+     * 부동산 실거래가 조회 (아파트)
+     * @param pageNo
+     * @param numOfRows
+     * @param lawdCd
+     * @param dealYmd
+     * @return
+     */
     @GetMapping(value = "/realestate/{pageNo}/{numOfRows}/{lawdCd}/{dealYmd}")
     public ResponseEntity getRealestate(@PathVariable String pageNo
                                         , @PathVariable String numOfRows
@@ -35,8 +43,11 @@ public class PublicDataController {
         /**
          * 부동산 정보 호출
          */
-
-        RealEstateResultDto realEstateResultDto = realEstateService.getRealEstateTransaction(pageNo, numOfRows, lawdCd, dealYmd);
+        RealEstateResultDto realEstateResultDto = realEstateService.getRealEstateTransaction(
+                                                                    pageNo
+                                                                    , numOfRows
+                                                                    , lawdCd
+                                                                    , dealYmd);
 
         HttpHeaders headers= new HttpHeaders();
         headers.setContentType(new MediaType(BaseConst.DEFAULT_CONTENT_TYPE
@@ -46,6 +57,6 @@ public class PublicDataController {
         return new ResponseEntity<>(new Message().builder()
                 .status(StatusEnum.OK)
                 .message("성공")
-                .data(realEstateResultDto.toString()).build(), headers, HttpStatus.OK);
+                .data(realEstateResultDto.getBody()).build(), headers, HttpStatus.OK);
     }
 }

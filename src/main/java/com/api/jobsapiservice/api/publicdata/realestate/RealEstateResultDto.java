@@ -1,6 +1,5 @@
 package com.api.jobsapiservice.api.publicdata.realestate;
 
-import com.api.jobsapiservice.api.publicdata.HeaderDto;
 import lombok.Data;
 import lombok.ToString;
 
@@ -12,6 +11,12 @@ public class RealEstateResultDto {
 
     HeaderDto header;
     BodyDto body;
+
+    @Data
+    static class HeaderDto{
+        private String resultCode;
+        private String resultMsg;
+    }
 
     @Data
     static class BodyDto{
@@ -42,7 +47,6 @@ public class RealEstateResultDto {
                 private String 건축년도;
                 private String 전용면적;
                 private String 해제사유발생일;
-
                 private String 일련번호;
                 private String 거래금액;
                 private String 도로명코드;

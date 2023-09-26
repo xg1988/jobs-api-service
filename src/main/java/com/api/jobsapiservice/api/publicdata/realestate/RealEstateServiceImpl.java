@@ -1,10 +1,9 @@
 package com.api.jobsapiservice.api.publicdata.realestate;
 
-import com.api.jobsapiservice.api.publicdata.HeaderDto;
 import com.api.jobsapiservice.contants.BaseConst;
+import com.api.jobsapiservice.dto.PublicDataURL;
 import com.api.jobsapiservice.util.HttpConnection;
 import com.api.jobsapiservice.util.JSONFromXMLService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,7 +17,6 @@ import java.io.UnsupportedEncodingException;
 @Service
 @Slf4j
 public class RealEstateServiceImpl implements RealEstateService{
-    @Value("${common.realestate.url}")
     private String URL;
 
     @Value("${common.realestate.service_key}")
@@ -26,10 +24,13 @@ public class RealEstateServiceImpl implements RealEstateService{
 
     private HttpConnection httpConnection;
     private JSONFromXMLService jsonFromXMLService;
+
     public RealEstateServiceImpl(HttpConnection httpConnection
-                            , JSONFromXMLService jsonFromXMLService){
+                            , JSONFromXMLService jsonFromXMLService
+                            ){
         this.httpConnection = httpConnection;
         this.jsonFromXMLService = jsonFromXMLService;
+        this.URL = PublicDataURL.REAL_ESTATE_URL.getUrl();
     }
 
     public RealEstateResultDto getRealEstateTransaction(String pageNo
@@ -47,21 +48,25 @@ public class RealEstateServiceImpl implements RealEstateService{
                     .serviceKey(SERVICE_KEY)
                     .build();
             String reqUrl = URL+ realEstateRequestDto.getQueryString();
+            log.debug("reqUrl : {}" , reqUrl);
             String result = httpConnection.call(reqUrl, BaseConst.GET_REQUEST_METHOD);
-
+            log.debug("result : {}" , result);
             JSONObject jsonObject = jsonFromXMLService.getJSONObjecFromXML(result);
 
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             realEstateResultDto = objectMapper.readValue(jsonObject.getJSONObject("response").toString(), RealEstateResultDto.class);
+
         }catch (UnsupportedEncodingException e){
             log.error("error : {}", e.getMessage());
+            e.printStackTrace();
         }catch (JsonMappingException e){
             log.error("error : {}", e.getMessage());
+            e.printStackTrace();
         }catch (Exception e){
             log.error("error : {}", e.getMessage());
+            e.printStackTrace();
         }
-
 
         return realEstateResultDto;
     }
