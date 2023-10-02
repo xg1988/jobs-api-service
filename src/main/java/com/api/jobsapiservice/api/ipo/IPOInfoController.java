@@ -66,7 +66,7 @@ public class IPOInfoController {
         return new ResponseEntity<>(new Message().builder()
                 .status(StatusEnum.OK)
                 .message("성공")
-                .data(ipoInfoDto.toString()).build(), headers, HttpStatus.OK);
+                .data(ipoInfoDto).build(), headers, HttpStatus.OK);
     }
 
     /**
@@ -87,6 +87,6 @@ public class IPOInfoController {
         return new ResponseEntity<>(new Message().builder()
                 .status(StatusEnum.OK)
                 .message("성공")
-                .data(ipoInfoDto.toString()).build(), headers, HttpStatus.OK);
+                .data(ipoInfoDto).build(), headers, HttpStatus.OK);
     }
 }

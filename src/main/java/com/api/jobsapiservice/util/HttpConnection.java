@@ -4,10 +4,7 @@ import com.api.jobsapiservice.contants.BaseConst;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -18,10 +15,10 @@ public class HttpConnection {
         return call(callUrl, method, null, "");
     }
     public String call(String callUrl, String method, String userAgent, String data) {
-        log.debug("callUrl : {}", callUrl);
-        log.debug("method : {}", method);
-        log.debug("userAgent : {}", userAgent);
-        log.debug("data : {}", data);
+        log.info("callUrl : {}", callUrl);
+        log.info("method : {}", method);
+        log.info("userAgent : {}", userAgent);
+        log.info("data : {}", data);
 
         String response = null;
 
@@ -30,18 +27,27 @@ public class HttpConnection {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             connection.setRequestMethod(method);
-            connection.setRequestProperty(BaseConst.USER_AGENT, userAgent);
 
             if(BaseConst.POST_REQUEST_METHOD.equals(method)){
+                log.info("POST_REQUEST_METHOD called..");
+                connection.setRequestProperty("Content-Type", "application/json; utf-8");
+                connection.setRequestProperty("Accept", "application/json");
+
                 connection.setDoOutput(true);
-                DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
-                outputStream.writeBytes(data);
-                outputStream.flush();
-                outputStream.close();
+                OutputStream os = connection.getOutputStream();
+                try{
+                    byte[] input = data.getBytes("utf-8");
+                    os.write(input, 0, input.length);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }finally {
+                    os.flush();
+                    os.close();
+                }
             }
 
             int responseCode = connection.getResponseCode();
-            log.debug("responseCode : {}" , responseCode);
+            log.info("responseCode : {}" , responseCode);
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuffer stringBuffer = new StringBuffer();
